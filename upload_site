@@ -1,0 +1,3 @@
+#!/bin/zsh
+source .env
+python ./src/main.py www.test.com
