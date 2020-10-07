@@ -1,3 +1,3 @@
 #!/bin/zsh
 source .env
-python ./src/main.py www.test.com
+python ./src/main.py polylang.io

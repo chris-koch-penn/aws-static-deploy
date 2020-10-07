@@ -10,6 +10,9 @@ def create_ACM_certificate(domain):
 	return res["CertificateArn"]
 
 def get_DNS_records_for_validation(arn):
-	res = client.describe_certificate(CertificateArn=arn)
-	records = res["Certificate"]["DomainValidationOptions"]["ResourceRecord"]
-	return records
+	try:
+		res = client.describe_certificate(CertificateArn=arn)
+		return res["Certificate"]["DomainValidationOptions"][0]["ResourceRecord"]
+	except Exception as e: 
+		print(e)
+		return "Failed to get DNS Validation records. This domain may not be verifiable."
