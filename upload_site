@@ -1,3 +1,3 @@
 #!/bin/zsh
 source .env
-python ./src/main.py polylang.io
+python ../serverless-datascience/src/main.py polylang.io
