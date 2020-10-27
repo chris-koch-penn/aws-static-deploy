@@ -6,7 +6,7 @@ cloudfront = boto_client("cloudfront")
 def create_distribution(domain, cert_arn):
     config = {
         "CallerReference": domain,
-        "Aliases": {"Quantity": 1, "Items": [domain]},
+        "Aliases": {"Quantity": 1, "Items": ["*." + domain, domain]},
         "DefaultRootObject": "index.html",
         "Comment": domain,
         "Enabled": True,
@@ -33,13 +33,8 @@ def create_distribution(domain, cert_arn):
             "MinTTL": 43200,
         },
         "ViewerCertificate": {
-            # 'CloudFrontDefaultCertificate': True|False,
-            # 'IAMCertificateId': 'string',
             "ACMCertificateArn": cert_arn,
             "SSLSupportMethod": "sni-only",
-            # 'MinimumProtocolVersion': 'SSLv3'|'TLSv1'|'TLSv1_2016'|'TLSv1.1_2016'|'TLSv1.2_2018'|'TLSv1.2_2019',
-            # 'Certificate': 'string',
-            # 'CertificateSource': 'cloudfront'|'iam'|'acm'
             "CertificateSource": "acm",
         },
     }
@@ -49,9 +44,8 @@ def create_distribution(domain, cert_arn):
 
 def check_if_distribution_exists(domain):
     res = cloudfront.list_distributions()["DistributionList"]
-    print(res)
     if "Items" in res:
-        distros = [d for d in res["Items"] if d["DomainName"] == domain]
-        return bool(len(distros))
+        distros = [d for d in res["Items"] if d["Comment"] == domain]
+        return len(distros) >= 1
     else:
         return False

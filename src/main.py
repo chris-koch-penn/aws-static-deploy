@@ -39,6 +39,7 @@ if not s3.check_if_bucket_exists(domain):
     res = s3.set_bucket_website_config(domain)
     print(res)
 
+s3.set_public_policy(domain)
 files = s3.glob_files(rootdir)
 s3.sync_website(domain, rootdir, files)
 
