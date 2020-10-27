@@ -6,7 +6,7 @@ cloudfront = boto_client("cloudfront")
 def create_distribution(domain, cert_arn):
     config = {
         "CallerReference": domain,
-        "Aliases": {"Quantity": 1, "Items": ["*." + domain, domain]},
+        "Aliases": {"Quantity": 2, "Items": ["*." + domain, domain]},
         "DefaultRootObject": "index.html",
         "Comment": domain,
         "Enabled": True,
