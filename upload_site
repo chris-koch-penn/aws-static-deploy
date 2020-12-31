@@ -1,3 +1,4 @@
 #!/bin/zsh
+# Example script to upload a website to S3.
 source .env
-python ../serverless-datascience/src/main.py polylang.io
+python ../serverless-deploy/src/main.py polylang.io
