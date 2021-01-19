@@ -109,6 +109,7 @@ def glob_files(rootdir, exclude_paths=[], exclude_types=[], extra_include_types=
             "wav",
             "woff",
             "xlsx",
+            "xml",
             "zip",
         ]
     )

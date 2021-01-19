@@ -1,4 +1,4 @@
 #!/bin/zsh
 # Example script to upload a website to S3.
-source .env
-python ../serverless-deploy/src/main.py polylang.io
+source .env             # Should contain your AWS keys.
+python ./src/main.py <apex domain> <path to root directory of site>
