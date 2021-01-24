@@ -124,12 +124,12 @@ def glob_files(rootdir, exclude_paths=[], exclude_types=[], extra_include_types=
     if total_size > GB:
         gbs = round(total_size / GB, 2)
         msg = (
-            "Websites uploaded to Serverless Deploy can't be larger than 1GB - your website"
+            "Websites uploaded to S3 should try to be smaller than 1GB - your website"
             + f" is {gbs} GBs. Check to see if you are running this command in the correct "
             + "directory. If there are file types that are not necessary for your build, "
-            + "exclude them using the exclude_file_types option in your sds.config.json file."
+            + "exclude them using the exclude_file_types option."
         )
-        return quit_on_error(msg)
+        print(msg)
     return files
 
 
