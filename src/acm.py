@@ -27,12 +27,14 @@ def list_certs(status):
     return client.list_certificates(CertificateStatuses=[status])
 
 
-def get_cert_arn(domain):
+def get_cert_arn(domain, soft_fail=False):
     issued = list_certs("ISSUED")["CertificateSummaryList"]
     pending = list_certs("PENDING_VALIDATION")["CertificateSummaryList"]
     issued = [c["CertificateArn"] for c in issued if c["DomainName"] == domain]
     pending = [c["CertificateArn"] for c in pending if c["DomainName"] == domain]
-    if len(issued) == 0:
+    if len(issued) == 0 and soft_fail: 
+        return False
+    elif len(issued) == 0:
         if len(pending) == 0:
             quit_on_error(
                 (

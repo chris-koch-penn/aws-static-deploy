@@ -8,7 +8,7 @@ Running the shell script ./upload_site does the following:
 4. Creates a Cloudfront distribution pointed to that S3 bucket using the ACM certificate.
 5. Creates an apex dns record pointing to that Cloudfront.
 6. Syncs the specified directory to the S3 bucket.
-7. Invalidates the Cloudfront cache.
+7. Invalidates the old Cloudfront cache.
 
 The main Python script can be run like so with the following arguments:
 ```bash

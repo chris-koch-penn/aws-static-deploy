@@ -12,3 +12,12 @@ def boto_client(service):
 def quit_on_error(msg):
     print("[red]" + msg + "[red]")
     exit(0)
+
+
+def extract_zoneid(hosted_zone):
+    # try:
+    uid = hosted_zone["Id"]
+    res = uid.replace("/hostedzone/", "")
+    return res
+    # except:
+        # return False
